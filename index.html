@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="SIGMA LOTS"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="description" content="SIGMA Lots Calculator — calculate position size from balance, risk, entry and stop loss.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>SIGMA Lots Calculator</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#141820;--panel2:#1a202b;--line:#34302a;--muted:#a6a6ad;--text:#f7f4ed;--gold:#d9b66f;--green:#7bd9ad;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -18%,#292316 0,transparent 47%),radial-gradient(ellipse at 100% 45%,#171923 0,transparent 42%),var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+main{width:min(100% - 28px,520px);margin:0 auto;padding:28px 0 40px}.brand{text-align:center;margin:8px 0 24px}.sigma{font-size:31px;letter-spacing:.22em;font-weight:950;line-height:1.15;background:linear-gradient(180deg,#fff2b8 0%,#f5ca62 42%,#b87918 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 5px 18px #e8b84d30;filter:drop-shadow(0 2px 1px #000)}.brand h1{font-size:25px;letter-spacing:.08em;margin:7px 0 4px}.brand p{color:var(--muted);font-size:11px;letter-spacing:.16em;margin:0}
+.card{background:linear-gradient(145deg,rgba(27,29,34,.98),rgba(17,19,24,.99));border:1px solid #37332b;border-radius:20px;padding:19px;margin:14px 0;box-shadow:0 16px 42px #0005, inset 0 1px 0 #ffffff08}.section{font-size:11px;color:var(--gold);letter-spacing:.16em;font-weight:800;margin:0 0 16px}.field{margin:13px 0}.field label{display:block;color:#c5cfdd;font-size:12px;font-weight:650;margin:0 0 7px}.field input,.field select{width:100%;background:linear-gradient(180deg,#10141b,#0d1016);color:var(--text);border:1px solid #373b43;border-radius:12px;padding:13px 12px;font:inherit;outline:none;box-shadow:inset 0 1px 3px #0007}.field input:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d9b66f1c,0 0 18px #d9b66f12}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hint{font-size:11px;color:var(--muted);line-height:1.5;margin:8px 1px}.btn{width:100%;border:1px solid #e4c98f;border-radius:13px;padding:16px 15px;background:linear-gradient(105deg,#f0dfb5 0%,#d9b66f 48%,#c49a50 100%);color:#211b10;font-weight:850;font-size:13px;letter-spacing:.13em;margin-top:12px;cursor:pointer;box-shadow:0 8px 22px #c49a5025, inset 0 1px 0 #fff8e7;transition:filter .18s ease,box-shadow .18s ease,transform .18s ease}.btn:hover{filter:brightness(1.06);box-shadow:0 10px 28px #c49a5035,inset 0 1px 0 #fff8e7;transform:translateY(-1px)}.btn:active{transform:translateY(0);filter:brightness(.98);box-shadow:0 4px 12px #c49a5020,inset 0 1px 2px #8c6b34}.result{display:none}.result.show{display:block}.hero{background:#0b1421;border:1px solid #2d4358;border-radius:15px;padding:17px;text-align:center}.hero small{display:block;color:var(--muted);letter-spacing:.13em;font-size:10px}.lots{font-size:39px;line-height:1.2;font-weight:850;color:var(--green);margin:7px 0 2px;overflow-wrap:anywhere}.sub{font-size:12px;color:var(--muted)}.result .hero{padding:27px 17px;background:radial-gradient(circle at 50% 0%,#26334b 0,#0b1421 68%);border-color:#705522;box-shadow:inset 0 0 28px #e8b84d0b}.result .lots{font-size:clamp(42px,12vw,58px);color:#f4c65e;text-shadow:0 0 24px #e8b84d35}.result .sub{margin-top:8px}.warning{display:none;background:#351d23;border:1px solid #713c45;color:#ffd5d5;padding:12px;border-radius:11px;font-size:12px;line-height:1.5;margin-top:12px}.warning.show{display:block}.foot{color:#9aa8ba;text-align:center;font-size:10px;line-height:1.7;margin:22px 10px 8px;padding:17px 15px;border:1px solid #263449;border-radius:16px;background:linear-gradient(145deg,#1a1b20,#101217)}.foot .slogan{display:block;color:#e4c783;font-weight:850;letter-spacing:.08em;font-size:12px;line-height:1.7;margin-top:15px}.foot .final-line{display:block;color:#d9b66f;font-weight:800;letter-spacing:.12em;font-size:10px;margin-top:10px}.mutedline{height:1px;background:var(--line);margin:16px 0}.tag{display:inline-block;color:var(--green);font-size:10px;border:1px solid #28634e;padding:4px 8px;border-radius:30px;letter-spacing:.08em}
+</style></head>
+<body><main>
+<header class="brand"><div class="sigma">SIGMA</div><h1>LOTS CALCULATOR</h1><p>PRECISION IN EVERY TRADE.</p></header>
+<section class="card">
+ <div class="grid">
+  <div class="field"><label for="balance">ACCOUNT BALANCE</label><input id="balance" type="number" min="0" step="any" value="670" inputmode="decimal"></div>
+  <div class="field"><label for="risk">RISK (%)</label><input id="risk" type="number" min="0" max="100" step="any" value="2" inputmode="decimal"></div>
+ </div>
+ <div class="field"><label for="pair">TRADING INSTRUMENT</label><select id="pair"><option value="XAUUSD">XAUUSD — Gold</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="AUDUSD">AUDUSD</option><option value="NZDUSD">NZDUSD</option><option value="USDJPY">USDJPY</option><option value="USDCAD">USDCAD</option><option value="USDCHF">USDCHF</option></select></div>
+ <div class="grid">
+  <div class="field"><label for="entry">OPEN / ENTRY PRICE</label><input id="entry" type="number" step="any" placeholder="e.g. 2650.00" inputmode="decimal"></div>
+  <div class="field"><label for="stop">STOP-LOSS PRICE</label><input id="stop" type="number" step="any" placeholder="e.g. 2645.00" inputmode="decimal"></div>
+ </div>
+ <button class="btn" id="calculate">CALCULATE LOT SIZE</button>
+ <div class="warning" id="error" role="alert"></div>
+</section>
+<section class="card result" id="result" aria-live="polite">
+ <div class="hero"><small>CALCULATED LOT SIZE</small><div class="lots" id="lots">—</div><div class="sub" id="lotnote">Standard lots · rounded down to 0.01</div></div>
+</section>
+<footer class="foot">
+ <span class="slogan">SIGMA FROM EARTH.<br>EXECUTION FROM ANOTHER PLANET. 🌍</span>
+ <span class="final-line">SIGMA STILL HAS WORK TO DO.</span>
+</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=(n,d=2)=>new Intl.NumberFormat('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n);
+function calculate(){
+ const balance=Number($('balance').value),risk=Number($('risk').value),entry=Number($('entry').value),stop=Number($('stop').value),pair=$('pair').value;
+ const err=$('error'),out=$('result');err.classList.remove('show');out.classList.remove('show');
+ const fail=m=>{err.textContent=m;err.classList.add('show')};
+ if(!Number.isFinite(balance)||balance<=0)return fail('Enter an account balance greater than zero.');
+ if(!Number.isFinite(risk)||risk<=0||risk>100)return fail('Risk must be greater than 0% and no more than 100%.');
+ if(!Number.isFinite(entry)||entry<=0||!Number.isFinite(stop)||stop<=0)return fail('Enter valid positive entry and stop-loss prices.');
+ if(entry===stop)return fail('Entry and stop-loss prices cannot be the same.');
+ const riskCash=balance*risk/100,dist=Math.abs(entry-stop);let lossPerLot,pipInfo,method;
+ if(pair==='XAUUSD'){
+  // Common XAUUSD contract assumption: 100 troy ounces per standard lot.
+  lossPerLot=dist*100;pipInfo='USD per standard lot';method='Assumption: XAUUSD contract = 100 troy ounces per 1.00 lot. Price movement × 100 oz gives estimated USD loss per lot.';
+ }else{
+  const pipSize=pair.endsWith('JPY')?0.01:0.0001;
+  const pips=dist/pipSize;
+  let pipValue;
+  if(['EURUSD','GBPUSD','AUDUSD','NZDUSD'].includes(pair))pipValue=10;
+  else if(['USDJPY','USDCAD','USDCHF'].includes(pair))pipValue=10/entry;
+  else return fail('This instrument is not supported in V1.');
+  lossPerLot=pips*pipValue;
+  pipInfo=pair.endsWith('JPY')?`${fmt(pips,1)} pips`:`${fmt(pips,1)} pips`;
+  method=`Assumption: 100,000 base units per 1.00 lot; pip size ${pipSize}. Pip value is converted to USD using the entry price for ${pair}.`;
+ }
+ if(!Number.isFinite(lossPerLot)||lossPerLot<=0)return fail('Could not calculate this position. Check your prices.');
+ const rawLots=riskCash/lossPerLot;
+ // Round down to common 0.01 lot step so rounding does not exceed the selected risk.
+ const lots=Math.floor((rawLots+1e-10)*100)/100;
+ if(lots<0.01){$('lots').textContent='< 0.01';$('lotnote').textContent='Below the common 0.01 minimum lot size';}
+ else{$('lots').textContent=fmt(lots,2)+' lots';$('lotnote').textContent=`Rounded down from ${fmt(rawLots,4)} lots · 0.01 lot step`}
+ out.classList.add('show');
+}
+$('calculate').addEventListener('click',calculate);
+['balance','risk','entry','stop','pair'].forEach(id=>$(id).addEventListener('input',()=>{$('result').classList.remove('show');$('error').classList.remove('show')}));
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
